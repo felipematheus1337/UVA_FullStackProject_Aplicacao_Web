@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import usuarioRoutes from './src/routes/usuarioRoutes';
 import tokenRoutes from './src/routes/tokenRoutes';
+import alunoRoutes from './src/routes/alunoRoutes';
 
 dotenv.config();
 import './src/database';
@@ -22,6 +23,7 @@ class App {
 
   routes() {
     this.app.use('/user', usuarioRoutes);
+    this.app.use('/aluno', alunoRoutes);
     this.app.use('/login', tokenRoutes);
   }
 }

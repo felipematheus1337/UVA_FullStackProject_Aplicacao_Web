@@ -1,4 +1,5 @@
 import Usuario from '../models/Usuario';
+import PasswordTokenService from '../service/PasswordTokenService';
 
 class UsuarioController {
   async store(req, res) {
@@ -77,6 +78,17 @@ class UsuarioController {
 
       await usuarioParaDeletar.destroy();
       return res.status(200).json('Deletado com sucesso');
+    } catch (e) {
+      console.log(e);
+      return res.status(406).json({ error: e });
+    }
+  }
+
+  async recoverPassword(req, res) {
+    const { email } = req.body;
+    try {
+      const result = await PasswordTokenService.createTokenForRecover(email);
+      return res.status(200).json(result);
     } catch (e) {
       console.log(e);
       return res.status(406).json({ error: e });

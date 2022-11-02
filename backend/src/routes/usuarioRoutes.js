@@ -9,5 +9,6 @@ router.get('/:id', loginAuth, usuarioController.show);
 router.put('/:id', loginAuth, usuarioController.update);
 router.post('/', usuarioController.store);
 router.delete('/:id', loginAuth, usuarioController.delete);
+router.post('/recover', usuarioController.recoverPassword);
 
 export default router;

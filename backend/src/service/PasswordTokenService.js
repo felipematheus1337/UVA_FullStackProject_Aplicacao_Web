@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import Usuario from '../models/Usuario';
 import Passwordtoken from '../models/Passwordtoken';
+
+dotenv.config();
 
 class PasswordTokenService {
   async createTokenForRecover(email) {
@@ -33,6 +37,33 @@ class PasswordTokenService {
       console.log(e);
       return [];
     }
+  }
+
+  async sendMailTo(obj) {
+    // const { emailId } = obj.token.id;
+    // const { email } = await Usuario.findOne({ emailId });
+    const transportador = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      service: 'gmail',
+      secure: true,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASS,
+      },
+    });
+    const emailASerEnviado = {
+      from: process.env.EMAIL,
+      to: 'fordeveloperusing@gmail.com',
+      subject: 'Teste de envio de email',
+      text: obj.token.token,
+    };
+    transportador.sendMail(emailASerEnviado, (err) => {
+      if (err) {
+        console.log(err);
+        return { status: false, error: err };
+      }
+      return { status: true, msg: 'Enviado com sucesso!' };
+    });
   }
 }
 

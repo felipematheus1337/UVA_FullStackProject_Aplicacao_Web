@@ -88,7 +88,9 @@ class UsuarioController {
     const { email } = req.body;
     try {
       const result = await PasswordTokenService.createTokenForRecover(email);
-      return res.status(200).json(result);
+      const emailFoiEnviado = await PasswordTokenService.sendMailTo(result);
+      console.log(emailFoiEnviado);
+      return res.status(200).json({ emailFoiEnviado });
     } catch (e) {
       console.log(e);
       return res.status(406).json({ error: e });

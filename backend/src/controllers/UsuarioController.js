@@ -1,5 +1,6 @@
 import Usuario from '../models/Usuario';
 import PasswordTokenService from '../service/PasswordTokenService';
+import UsuarioService from '../service/UserService';
 
 class UsuarioController {
   async store(req, res) {
@@ -89,11 +90,23 @@ class UsuarioController {
     try {
       const result = await PasswordTokenService.createTokenForRecover(email);
       const emailFoiEnviado = await PasswordTokenService.sendMailTo(result);
-      console.log(emailFoiEnviado);
-      return res.status(200).json({ emailFoiEnviado });
+      return res.status(200).json({ emailFoiEnviado, email });
     } catch (e) {
       console.log(e);
       return res.status(406).json({ error: e });
+    }
+  }
+
+  async changePassword(req, res) {
+    const { token, password, email } = req.body;
+    const isTokenValid = await PasswordTokenService.validate(token);
+
+    if (isTokenValid.status) {
+      // eslint-disable-next-line max-len
+      await UsuarioService.changePassword(password, email, isTokenValid.token.token);
+      res.status(200).send('Senha alterada!');
+    } else {
+      res.status(406).send('Token inválido!');
     }
   }
 }

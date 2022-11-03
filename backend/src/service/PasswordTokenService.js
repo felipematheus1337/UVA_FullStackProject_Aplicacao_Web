@@ -62,8 +62,27 @@ class PasswordTokenService {
         console.log(err);
         return { status: false, error: err };
       }
-      return { status: true, msg: 'Enviado com sucesso!' };
+      return { status: true, msg: obj };
     });
+    return { status: true, msg: obj };
+  }
+
+  async validate(token) {
+    try {
+      const result = await Passwordtoken.findOne({ where: { token } });
+      if (result) {
+        const tk = result;
+        console.log('TKKK', tk);
+        if (tk.used) {
+          return { status: false };
+        }
+        return { status: true, token: tk };
+      }
+      return { status: false };
+    } catch (e) {
+      console.log(e);
+      return { status: false };
+    }
   }
 }
 

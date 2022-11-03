@@ -10,5 +10,6 @@ router.put('/:id', loginAuth, usuarioController.update);
 router.post('/', usuarioController.store);
 router.delete('/:id', loginAuth, usuarioController.delete);
 router.post('/recover', usuarioController.recoverPassword);
+router.post('/changepassword', usuarioController.changePassword);
 
 export default router;

@@ -120,17 +120,22 @@ class UsuarioController {
 
   async login(req, res) {
     const { email, password } = req.body;
-    const user = await UserService.findByEmail(email);
-    if (user !== undefined) {
-      const result = await bcrypt.compare(password, user.password_hash);
-      if (result) {
-        const token = jwt.sign({ email: user.email, id: user.id }, JWTSecret);
-        res.status(200).json({ token });
+    try {
+      const user = await UserService.findByEmail(email);
+      if (user !== undefined) {
+        const result = await bcrypt.compare(password, user.password_hash);
+        if (result) {
+          const token = jwt.sign({ email: user.email, id: user.id }, JWTSecret);
+          res.status(200).json({ token });
+        } else {
+          res.status(406).json('Senha incorreta');
+        }
       } else {
-        res.status(406).json('Senha incorreta');
+        res.status(400).json('error');
       }
-    } else {
-
+    } catch (e) {
+      console.log(e);
+      res.status(406).json(e);
     }
   }
 }

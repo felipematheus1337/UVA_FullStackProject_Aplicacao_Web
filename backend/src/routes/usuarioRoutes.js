@@ -11,5 +11,6 @@ router.post('/', usuarioController.store);
 router.delete('/:id', loginAuth, usuarioController.delete);
 router.post('/recover', usuarioController.recoverPassword);
 router.post('/changepassword', usuarioController.changePassword);
+router.post('/login', usuarioController.login);
 
 export default router;

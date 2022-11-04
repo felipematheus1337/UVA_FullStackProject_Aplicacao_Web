@@ -1,6 +1,14 @@
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 import Usuario from '../models/Usuario';
 import PasswordTokenService from '../service/PasswordTokenService';
+import UserService from '../service/UserService';
 import UsuarioService from '../service/UserService';
+
+dotenv.config();
+
+const JWTSecret = process.env.TOKEN_SECRET;
 
 class UsuarioController {
   async store(req, res) {
@@ -107,6 +115,22 @@ class UsuarioController {
       res.status(200).send('Senha alterada!');
     } else {
       res.status(406).send('Token inválido!');
+    }
+  }
+
+  async login(req, res) {
+    const { email, password } = req.body;
+    const user = await UserService.findByEmail(email);
+    if (user !== undefined) {
+      const result = await bcrypt.compare(password, user.password_hash);
+      if (result) {
+        const token = jwt.sign({ email: user.email, id: user.id }, JWTSecret);
+        res.status(200).json({ token });
+      } else {
+        res.status(406).json('Senha incorreta');
+      }
+    } else {
+
     }
   }
 }

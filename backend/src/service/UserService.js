@@ -11,6 +11,16 @@ class UsuarioServive {
       console.log(e);
     });
   }
+
+  async findByEmail(email) {
+    try {
+      const userByEmail = await Usuario.findOne({ email });
+      return userByEmail;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
 }
 
 export default new UsuarioServive();

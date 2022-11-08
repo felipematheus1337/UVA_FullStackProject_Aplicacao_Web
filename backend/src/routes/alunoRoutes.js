@@ -4,7 +4,7 @@ import loginAuth from '../middlewares/loginAuth';
 
 const router = Router();
 
-router.get('/', loginAuth, alunoController.index);
+router.get('/', alunoController.index);
 router.get('/:id', loginAuth, alunoController.show);
 router.put('/:id', loginAuth, alunoController.update);
 router.post('/', loginAuth, alunoController.store);

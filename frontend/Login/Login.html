@@ -42,17 +42,17 @@
 				<form class="form">
 					<label class="label-input" for="">
 						<i class="fa-solid fa-user icon-modify"></i>
-						<input type="text" placeholder="Nome">
+						<input type="text" placeholder="Nome" name="name">
 					</label>
 					<label class="label-input" for="">
 						<i class="fa-solid fa-envelope icon-modify"></i>
-						<input type="email" placeholder="Email">
+						<input type="email" placeholder="Email" name="email">
 					</label>
 					<label class="label-input" for ="">
 						<i class="fa-solid fa-lock icon-modify"></i>
-						<input type="password" placeholder="Senha">
+						<input type="password" placeholder="Senha" name="password">
 					</label>
-					<button  class="btn btn-second">Sign up</button>
+					<button  class="btn btn-second" onclick="cadastrarUsuario()">Sign up</button>
 				</form>
 			</div>
 		</div>
@@ -102,7 +102,10 @@
 			</div>
 		</div> 
 	</div>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="js/app.js"></script>
+	
+	</script>
 </body>
 </html>	
 	

@@ -1,3 +1,4 @@
+var baseURL = "http://localhost:3000"
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {accordion: true});
@@ -15,12 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
-window.addEventListener('load',() => {
-    const ERROR_TO_RENDER = 'Students not Found'
-    let listOfStudents = JSON.parse(localStorage.getItem('students')) || ERROR_TO_RENDER;
-
-    if(listOfStudents != ERROR_TO_RENDER) {
-        createResultElements(listOfStudents.length);
+window.addEventListener('load', async () => {
+      var listOfStudents;
+       await axios.get(`${baseURL}/aluno`).then(res => {
+        listOfStudents = res.data;
+        })
+       
+    if(listOfStudents) {
+        createResultElements(listOfStudents);
     }  else {
         createPageWithNotFound();
     }
@@ -57,16 +60,14 @@ createPageWithNotFound = () => {
 
 
 
-createResultElements = () => {
-let timesToCreateStudents = JSON.parse(localStorage.getItem('students'));
+createResultElements = (listOfStudents) => {
+let timesToCreateStudents = listOfStudents
 let student = timesToCreateStudents
 for(let i = 0; i < timesToCreateStudents.length; i++) {
     let ul = document.getElementsByClassName('collapsible')[0]
     
     let li = document.createElement('li');
     li.setAttribute('class','');
-
-    
 
     let divHeader = document.createElement('div');
     divHeader.setAttribute('class','collapsible-header grey darken-3');
@@ -104,7 +105,7 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
     h5Sexo.innerHTML = `<i>Sexo:  </i>${student[i].sexo}`;
 
     let h5DataNascimento = document.createElement("h5");
-    h5DataNascimento.innerHTML = `<i>Data de Nascimento:  </i>${student[i].dataNascimento}`;
+    h5DataNascimento.innerHTML = `<i>Data de Nascimento:  </i>${moment(student[i].dataNascimento).format("DD/MM/YYYY")}`;
 
     let h5Endereco = document.createElement("h5");
     h5Endereco.innerHTML = `<i>Endereço:  </i>${student[i].endereco}`;
@@ -136,10 +137,6 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {accordion: false});
 
-
-    
-    
-    
 
 }
 

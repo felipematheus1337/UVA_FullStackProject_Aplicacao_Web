@@ -1,9 +1,17 @@
 var baseURL = "http://localhost:3000"
+var token = localStorage.getItem('token');
+
+const config = {
+    headers: {Authorization: `Bearer ${token}`}
+}
+
+console.log(config);
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {accordion: true});
 
-    const isLogged = localStorage.getItem('token')
+    const isLogged = token;
 
     if(!isLogged){
         setInterval(() => {
@@ -89,13 +97,19 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
 
     li.appendChild(divBody);
    
-    
+    let buttonRemove = document.createElement("button");
+    buttonRemove.setAttribute("class","btn red waves-yellow");
+    buttonRemove.innerHTML = `Remover`
+    divBody.appendChild(buttonRemove);
+    buttonRemove.style.marginLeft= '32px'
 
     let h3Nome = document.createElement('h6');
     h3Nome.setAttribute('class','h3-menu');
     h3Nome.innerHTML = `${student[i].nome}`;
     divHeader.appendChild(h3Nome);
     
+    let h5Id = document.createElement("h5");
+    h5Id.innerHTML = `<i>ID:  </i>${student[i].id}`;
 
     let h5Cpf = document.createElement("h5");
     h5Cpf.innerHTML = `<i>CPF:  </i>${student[i].cpf}`;
@@ -132,11 +146,23 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
     span.appendChild(h5Turno);
     ul.appendChild(li);
 
+    
+
 
 
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {accordion: false});
-
+    
+    
+    buttonRemove.addEventListener('click',async () => {
+        await axios.delete(`${baseURL}/aluno/`+student[i].id,config
+        ).then(res => {
+            M.toast({html: `${res.data}`},{displayLength: 3000},{classes:'toast'})
+        }).catch(e => {
+            console.log(e);
+        })
+        ul.remove(li);
+    })
 
 }
 

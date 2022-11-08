@@ -6,19 +6,51 @@ html,body {
 	width: 100%;
 	
 }
+html,body {
+    background-color: #212121;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+	height: 100%;
+	width: 100%;
+	
+}
+.select-consulta {
+    display: block;
+    width: 200px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    color: black;
+    background-color: #fcbe24;
+}
 
-.container {
+.btn.amber {
+    color: black;
+}
+
+.container-consulta {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100vh;
     max-width: 100%;  
     flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 h1 {
     text-align: center;
     color: #fcbe24;
     margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    color: #fcbe24;
+    margin-bottom: 20px; 
+    font-size: 1.5rem;
 }
 
 
@@ -126,7 +158,9 @@ h5:hover {
 }
 
 
-
+input {
+    color: white;
+}
 
 
 
@@ -153,5 +187,34 @@ h5:hover {
     }
     
   }
+
+  
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vh;
+    max-width: 100%;  
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
+    color: #fcbe24;
+    margin-bottom: 20px;
+}
+
+select {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
 
   

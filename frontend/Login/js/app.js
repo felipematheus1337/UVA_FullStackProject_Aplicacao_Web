@@ -59,7 +59,10 @@ async function login() {
                     email,
                     password
             }).then(response => {
-              console.log(response.data);
+              const token = response.data.token;
+              localStorage.setItem('token',token);
+              window.location.href = "http://127.0.0.1:5500/frontend/cadastro/cadastroForm.html"
+              
 
             }).catch(e => {
                 console.log(e);

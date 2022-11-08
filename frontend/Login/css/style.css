@@ -12,7 +12,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ecf0f1;
+    background-color: #212121;
 }
 .content first-content{
     width: 100px;
@@ -21,7 +21,7 @@ body{
     margin: 0 auto;
 }
 .content{
-    background-color: #FFFF00;
+    background-color:  #fcbe24;
     border-radius: 15px;
     width: 960px;
     height: 50%;
@@ -53,7 +53,8 @@ body{
     text-align: center;
 }
 .title-second{
-    color: #000000;
+    color: #fcbe24;
+    background-color: black;
 }
 .description{
     font-size: 14px;

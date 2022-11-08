@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
+    const isLogged = localStorage.getItem('token')
+
+    if(!isLogged){
+        setInterval(() => {
+          M.toast({html: 'Precisa estar logado!!'},{displayLength: 5000},{classes:'toast'})
+        },5000)
+    window.location.href = "http://127.0.0.1:5500/frontend/Login/Login.html"
+    }
 });
 
 

@@ -14,8 +14,12 @@ class UsuarioServive {
 
   async findByEmail(email) {
     try {
-      const userByEmail = await Usuario.findOne({ email });
-      return userByEmail;
+      let usuario;
+      await Usuario.findOne(email).then((response) => {
+        usuario = response;
+        console.log(usuario);
+      }).catch((e) => e);
+      return usuario;
     } catch (e) {
       console.log(e);
       return null;

@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import Usuario from '../models/Usuario';
 import PasswordTokenService from '../service/PasswordTokenService';
 import UserService from '../service/UserService';
-import UsuarioService from '../service/UserService';
 
 dotenv.config();
 
@@ -111,7 +110,7 @@ class UsuarioController {
 
     if (isTokenValid.status) {
       // eslint-disable-next-line max-len
-      await UsuarioService.changePassword(password, email, isTokenValid.token.token);
+      await UserService.changePassword(password, email, isTokenValid.token.token);
       res.status(200).send('Senha alterada!');
     } else {
       res.status(406).send('Token inválido!');
@@ -120,9 +119,12 @@ class UsuarioController {
 
   async login(req, res) {
     const { email, password } = req.body;
+    console.log('DADOS', req.body);
     try {
-      const user = await UserService.findByEmail(email);
+      const user = await UserService.findByEmail({ where: { email } });
+      console.log('O USER', user);
       if (user !== undefined) {
+        console.log('ACHOU', user);
         const result = await bcrypt.compare(password, user.password_hash);
         if (result) {
           const token = jwt.sign({ email: user.email, id: user.id }, JWTSecret);

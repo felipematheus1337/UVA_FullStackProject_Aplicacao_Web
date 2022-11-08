@@ -2,7 +2,7 @@
 var btnSignin = document.querySelector("#signin");
 var btnSignup = document.querySelector("#signup");
 var body = document.querySelector("body");
-var baseURL = "http://localhost:3000/"
+var baseURL = "http://localhost:3000"
 
 btnSignin.addEventListener("click",function()
 {
@@ -20,14 +20,13 @@ async function cadastrarUsuario() {
     let nome = document.getElementsByName("name")[0].value;
     let email = document.getElementsByName("email")[0].value;
     let password = document.getElementsByName("password")[0].value;
-    if((!checkBlankValues(nome,email,password))) {
+    if((!checkBlankValuesToRegisterAnUser(nome,email,password))) {
      try {
-      const usuario = {
+      await axios.post(`${baseURL}/user`,{
         nome,
         email,
         password
-      }
-      await axios.post(`${baseURL}user`,usuario).then(response => {
+      }).then(response => {
             let textSuccess = document.createElement('div');
             textSuccess.style.color = 'green';
             textSuccess.innerHTML = `Usuário cadastrado com sucesso, Pode fazer Login!`
@@ -49,6 +48,44 @@ async function cadastrarUsuario() {
      
 }
 
+async function login() {
+    event.preventDefault();
+    let email = document.getElementsByName("emailLogin")[0].value;
+    let password = document.getElementsByName("passwordLogin")[0].value;
+    if(!checkBlankValuesToLogin(email,password)) {
+        
+        try {
+            await axios.post(`${baseURL}/user/login`,{
+                    email,
+                    password
+            }).then(response => {
+              console.log(response.data);
+
+            }).catch(e => {
+                console.log(e);
+                let textResponse = document.getElementsByClassName("description description-second")[1];
+                let textFailed = document.createElement('div');
+                textFailed.style.color = 'red';
+                textFailed.innerHTML = `Falha ao Cadastrar usuário`
+                textResponse.appendChild(textFailed);
+            }) 
+                
+            
+
+        } catch(e) {
+            console.log(e);
+            let textResponse = document.getElementsByClassName("description description-second")[1];
+            let textFailed = document.createElement('div');
+            textFailed.style.color = 'red';
+            textFailed.innerHTML = `Falha ao Cadastrar usuário`
+            textResponse.appendChild(textFailed);
+        }
+    } else {
+        alert("Formato/tamanho de email e senha invalidos!")
+        return;
+    }
+}
+
 
 
 /*const getAlunos = () => {
@@ -64,7 +101,7 @@ async function cadastrarUsuario() {
 getAlunos();
 */
 
-const checkBlankValues = (name,email,password) => {
+const checkBlankValuesToRegisterAnUser = (name,email,password) => {
 
     if(name === '' || email === '' || password === '') {
         return true;
@@ -76,6 +113,19 @@ const checkBlankValues = (name,email,password) => {
         return false;
     }
     
+}
+
+const checkBlankValuesToLogin = (email,password) => {
+
+    if(email === '' || password === '') {
+        return true;
+    } else if (email.length <= 3 || password.length < 8) {
+        return true;
+    } else if (password.length <= 0 || email.length <= 0){
+        return true;
+    } else {
+        return false;
+    }
     
 }
 

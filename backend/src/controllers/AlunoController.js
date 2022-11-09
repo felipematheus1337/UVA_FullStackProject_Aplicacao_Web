@@ -1,4 +1,7 @@
+import { Sequelize } from 'sequelize';
 import Aluno from '../models/Aluno';
+
+const { Op } = Sequelize;
 
 class AlunoController {
   async store(req, res) {
@@ -79,6 +82,55 @@ class AlunoController {
     } catch (e) {
       console.log(e);
       return res.status(406).json({ error: e });
+    }
+  }
+
+  async consultarPorEmail(req, res) {
+    const { email } = req.params;
+    try {
+      const aluno = await Aluno.findOne(email);
+      return res.status(200).json(aluno);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ err: e });
+    }
+  }
+
+  async consultarPorNome(req, res) {
+    const { nome } = req.params;
+    // const query = `%${nome}`;
+    let aluno;
+    try {
+      aluno = await Aluno.findOne({ where: { nome: { [Op.substring]: nome } } });
+      console.log(aluno);
+      return res.status(200).json(aluno);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ err: e });
+    }
+  }
+
+  async consultarPorCpf(req, res) {
+    const { cpf } = req.params;
+    console.log(cpf);
+    try {
+      const aluno = await Aluno.findOne({ where: { cpf } });
+      return res.status(200).json(aluno);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ err: e });
+    }
+  }
+
+  async consultarPorMatricula(req, res) {
+    const { matricula } = req.params;
+    console.log(matricula);
+    try {
+      const aluno = await Aluno.findOne({ where: { matricula } });
+      return res.status(200).json(aluno);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ err: e });
     }
   }
 }

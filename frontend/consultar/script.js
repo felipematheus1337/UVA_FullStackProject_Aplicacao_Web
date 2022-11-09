@@ -18,6 +18,7 @@ function getElementsFromDOM() {
     select.addEventListener('change',(e) => {
         select.value = e.target.value;
         parametro = select.value;
+        
     })
     var button = document.getElementById("botaoConsulta")
     button.addEventListener('click',async () => {
@@ -27,6 +28,10 @@ function getElementsFromDOM() {
             alert("Não é possível uma consulta vazia!")
             return;
         }
+        await axios.get(`${baseURL}/aluno/${parametro}/${paramValue}`,paramValue).then(res => {
+            console.log(res);
+        })
+
     })
 
  

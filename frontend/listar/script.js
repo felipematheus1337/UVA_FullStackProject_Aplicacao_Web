@@ -5,7 +5,7 @@ const config = {
     headers: {Authorization: `Bearer ${token}`}
 }
 
-console.log(config);
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');

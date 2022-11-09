@@ -28,6 +28,17 @@ html,body {
     color: black;
 }
 
+.homeTotal {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    max-height: 100%;
+    height: 300px;
+    margin: auto auto;
+}
 .container-home {
     display: flex;
     flex-direction: row;
@@ -40,6 +51,7 @@ html,body {
     margin: 0 auto;
     
 }
+
 
 .container-home a {
     margin: 10px;

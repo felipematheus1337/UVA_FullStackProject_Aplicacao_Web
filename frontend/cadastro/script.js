@@ -1,7 +1,17 @@
+var baseURL = "http://localhost:3000"
+
+var token = localStorage.getItem('token');
+
+const config = {
+    headers: {Authorization: `Bearer ${token}`}
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
-    const isLogged = localStorage.getItem('token')
+
+    const isLogged = token;
+    
 
     if(!isLogged){
         setInterval(() => {
@@ -31,18 +41,11 @@ function getElements() {
     let dataNascimento = document.getElementById("datadenascimento").value;
     let email = document.getElementById("email").value;
     let curso = getFirstLetterToUpperCase(document.getElementById("curso").value);
-    let matricula = document.getElementById("matricula").value;
+    let matricula = parseInt(document.getElementById("matricula").value);
     let turno = getFirstLetterToUpperCase(document.getElementById("turno").value);
-    let id = idGenerator()
 
-
-    if(compareSensitiveValues(cpf,matricula,email)) {
-      return;
-    }
-    
 
     const aluno = {
-        id:id,
         nome:nome,
         cpf:cpf,
         endereco:endereco,
@@ -88,24 +91,33 @@ function getFirstLetterToUpperCase(value) {
 
 }
 
-function toStorageTheStudents(student) {
-    var students = JSON.parse(localStorage.getItem('students')) || [];
-    students.push(student)
-    localStorage.setItem('students',JSON.stringify(students));
-    console.log(JSON.parse(localStorage.getItem('students')));
+async function toStorageTheStudents(student) {
+  console.log(student)
+  let token = config.headers;
+  console.log(token);
+    await axios({
+      method:'post',
+      url:`${baseURL}/aluno`,
+      data:{
+        nome:student.nome,
+        email:student.email,
+        cpf:student.cpf,
+        sexo:student.sexo,
+        dataNascimento:student.dataNascimento,
+        turno:student.turno,
+        matricula:student.matricula,
+        endereco:student.endereco,
+        curso:student.curso
+      },
+      headers:token
+    }).then(response => {
+      console.log(response);
+    }).catch(e => {
+      console.log(e);
+    })
 }
 
-function idGenerator() {
-  let id;
-  let idToIncrement = JSON.parse(localStorage.getItem('students')) || 1;
 
-  if(!localStorage.getItem('students')) id = idToIncrement;
-  else {
-     id = idToIncrement.length + 1;
-  }
- 
-  return id;
-}
 
 
 function validarCPF(inputCPF){
@@ -129,35 +141,7 @@ function validarCPF(inputCPF){
 }
 
 
-compareSensitiveValues = (cpf,matricula,email) => {
-let listOfStudentsCpf = JSON.parse(localStorage.getItem('students')) || null;
-let iSnegative = false;
-
-if(listOfStudentsCpf != null) {
-    iSnegative = listOfStudentsCpf.find(function(iSnegative) {
-    if(iSnegative.cpf === cpf) {
-      M.toast({html: 'cpf  já cadastrado!'},{displayLength: 2500},{classes:'toast'})
-      return true;
-    } 
-    else if(iSnegative.email === email) {
-      M.toast({html: 'email já cadastrado'},{displayLength: 2500},{classes:'toast'})
-      return true;
-    }
-    else if(iSnegative.matricula === matricula) {
-      M.toast({html: 'matricula já cadastrada!'},{displayLength: 2500},{classes:'toast'})
-      return true;
-
-    } else {
-      return false;
-    }
-  }) || false;
-  return iSnegative;
-}
 
 
 
-
-return iSnegative;
-
-}
 

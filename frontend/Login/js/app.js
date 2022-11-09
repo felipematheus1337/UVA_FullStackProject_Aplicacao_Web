@@ -61,7 +61,7 @@ async function login() {
             }).then(response => {
               const token = response.data.token;
               localStorage.setItem('token',token);
-              window.location.href = "http://127.0.0.1:5500/frontend/cadastro/cadastroForm.html"
+              window.location.href = "http://127.0.0.1:5500/frontend/home/home.html"
               
 
             }).catch(e => {

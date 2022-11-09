@@ -58,5 +58,6 @@ width="100" height="50"/>
 <hr>
 
 <h2> Sobre </h2>
-<p><h4> Um Projeto onde será cadastrado um aluno, havendo uma tela de cadastro inicial, com botão para cadastrar, ou listar esse usuário</h4></p>
-<p><h4>Com utilização de JQuery e VanillaJS na parte do frontend, utilizando localStorage como armazenamento</h4></p>
+<p><h4> Um sistema de monitoramento de alunos, com cadastro, listar, filtrar, alterar, excluir um CRUD completo</h4></p>
+<p><h4>Com utilização de JQuery,VanillaJS,MaterializeCSS na parte do frontend, utilizando Amazon RDS com MySQL como Banco de Dados</h4></p>
+<p><h4>Backend Feito com NodeJS e Express, com uso de JWT como middleware para autenticação e autorização</h4></p>

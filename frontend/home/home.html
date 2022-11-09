@@ -22,27 +22,18 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <h3>Consulta de Aluno</h3>
-    <p>Escolha o parâmetro de busca!</p>
+    <h3>Sistema de Alunos</h3>
+    <p>Escolha a operação a ser realizada!</p>
     
     <!-- O segundo valor estará selecionado inicialmente -->
     
-      <div class="container-consulta">
-      <select  id="parametro" class="select-consulta">
-        <option value="email" selected>Email</option>
-        <option value="matricula">Matrícula</option>
-        <option value="nome">Nome</option>
-        <option value="cpf">CPF</option>
-      </select>
-      <br><br>
-      <input type="text" id="valorPesquisa">
-      <button id="botaoConsulta" class="btn amber"> Consultar! </button>
-    
+      <div class="container-home">
+        <a href="../cadastro/cadastroForm.html" target="_blank" rel="opener"><button id="botaoConsulta" class="btn amber"> Cadastrar </button></a>
+        <a href="../consultar/consultarAluno.html" target="_blank" rel="opener"><button id="botaoConsulta" class="btn amber"> Consultar </button></a>
+        <a href="../listar/listarAlunos.html" target="_blank" rel="opener"><button id="botaoConsulta" class="btn amber"> Listar/Excluir </button></a>
     </div>
 
-    <div class="result-consulta">
-      
-    </div>
+    
     
 
 

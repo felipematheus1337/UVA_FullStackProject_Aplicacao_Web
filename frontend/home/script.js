@@ -47,7 +47,7 @@ function getElementsFromDOM() {
 
 function generateSearchedStudent(student,clicked) {
     
-   let divResult = document.getElementsByClassName('result-consulta')[0];
+   let divResult = document.getElementsByClassName('result-consulta')[0]
    let studentName = document.createElement("h2");
    let studentCpf = document.createElement("h5");
    let studentEmail = document.createElement("h5");
@@ -57,8 +57,6 @@ function generateSearchedStudent(student,clicked) {
    let studentCurso = document.createElement("h5");
    let studentMatricula = document.createElement("h5");
    let studentTurno = document.createElement("h5");
-
-   
    
 
    studentName.innerHTML = `${student.nome}`
@@ -81,7 +79,6 @@ function generateSearchedStudent(student,clicked) {
    divResult.appendChild(studentCurso);
    divResult.appendChild(studentMatricula);
    divResult.appendChild(studentTurno);
-   
 
  
 

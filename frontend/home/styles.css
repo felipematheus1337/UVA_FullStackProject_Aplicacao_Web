@@ -28,9 +28,9 @@ html,body {
     color: black;
 }
 
-.container-consulta {
+.container-home {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100vh;
     max-width: 100%;  
     flex-wrap: wrap;
@@ -39,6 +39,10 @@ html,body {
     justify-content: center;
     margin: 0 auto;
     
+}
+
+.container-home a {
+    margin: 10px;
 }
 
 h3 {
@@ -178,7 +182,7 @@ input {
     border-radius: 10px;
     padding-left: 100px;
     padding-right: 100px;
-    
+    border: 4px solid black;
     
 
 }

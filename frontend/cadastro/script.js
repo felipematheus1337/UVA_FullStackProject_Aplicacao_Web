@@ -7,7 +7,7 @@ const config = {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('select');
+    var s = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
 
     const isLogged = token;
@@ -111,7 +111,15 @@ async function toStorageTheStudents(student) {
       },
       headers:token
     }).then(response => {
-      console.log(response);
+      if(response.status === 201) {
+        if(student.sexo === 'masculino') {
+          M.toast({html: 'Aluno cadastrado com sucesso!!'},{displayLength: 5000},{classes:'toast'})
+        } else {
+          M.toast({html: 'Aluna cadastrada com sucesso!!'},{displayLength: 5000},{classes:'toast'})
+        }
+         
+      }
+     
     }).catch(e => {
       console.log(e);
     })

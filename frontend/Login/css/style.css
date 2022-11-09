@@ -6,6 +6,7 @@
 }
 body{
     font-family: 'Open Sans', sans-serif;
+    background-color: #212121;
 }
 .container{
     display: flex;
@@ -20,6 +21,17 @@ body{
     align-items:justify;
     margin: 0 auto;
 }
+.content button {
+    background-color:  #fcbe24;
+    color: black;
+}
+
+.modal-content button {
+    background-color:  #fcbe24;
+    color: black;
+}
+
+
 .content{
     background-color:  #fcbe24;
     border-radius: 15px;

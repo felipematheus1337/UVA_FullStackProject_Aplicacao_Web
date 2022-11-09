@@ -2,6 +2,17 @@
 var btnSignin = document.querySelector("#signin");
 var btnSignup = document.querySelector("#signup");
 var body = document.querySelector("body");
+
+
+
+document.addEventListener('DOMContentLoaded',() => {
+   
+})
+
+
+
+
+
 var baseURL = "http://localhost:3000"
 
 btnSignin.addEventListener("click",function()
@@ -89,21 +100,6 @@ async function login() {
     }
 }
 
-
-
-/*const getAlunos = () => {
-    axios.get("http://localhost:3000/aluno")
-    .then(res => {
-        const alunos = res.data;
-        console.log("ALUNOS",alunos)
-    }).catch(e => {
-        console.log(e);
-    })
-}   
-
-getAlunos();
-*/
-
 const checkBlankValuesToRegisterAnUser = (name,email,password) => {
 
     if(name === '' || email === '' || password === '') {
@@ -131,5 +127,32 @@ const checkBlankValuesToLogin = (email,password) => {
     }
     
 }
+
+// Modal
+
+const elementsModal = document.querySelectorAll(".modal");
+const instancesModal = M.Modal.init(elementsModal);
+
+let buttonSendEmailToRecover =  document.getElementById("btnrecuperarsenha")
+buttonSendEmailToRecover.addEventListener('click',async () => {
+    let emailRecovery = document.getElementById("emailrecovery").value;
+    if(emailRecovery === '' || emailRecovery === " " || emailRecovery === null || emailRecovery === undefined) {
+        alert("Email vazio!")
+        return;
+    } else {
+        await axios.post(`${baseURL}/user/recover`,{
+            email:emailRecovery
+        }).then(response => {
+          if(response.status === 200) {
+            alert(String(`${response.data}`))
+            window.location.href = "http://127.0.0.1:5500/frontend/recoverpw/recover.html"
+          }
+        })
+        
+    }
+    
+    
+})
+
 
 

@@ -29,6 +29,16 @@ function getElementsFromDOM() {
                 password:senha,
                 email
             }
+            await axios.post(`${baseURL}/user/changepassword`,obj).then(async res => {
+                console.log(res);
+                if(res) {
+                        M.toast({html: 'Senha alterada com sucesso!!, Faça Login!'},{displayLength: 6000},{classes:'toast'})
+                        setInterval(() => {
+                            window.location.href =  "http://127.0.0.1:5500/frontend/Login/Login.html"
+                        },3000)
+                    
+                }
+            })
          
         }
         

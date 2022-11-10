@@ -39,7 +39,7 @@ class PasswordTokenService {
     }
   }
 
-  async sendMailTo(obj) {
+  async sendMailTo(obj, email) {
     // const { emailId } = obj.token.id;
     // const { email } = await Usuario.findOne({ emailId });
     const transportador = nodemailer.createTransport({
@@ -53,7 +53,7 @@ class PasswordTokenService {
     });
     const emailASerEnviado = {
       from: process.env.EMAIL,
-      to: 'fordeveloperusing@gmail.com',
+      to: email,
       subject: 'Teste de envio de email',
       text: obj.token.token,
     };

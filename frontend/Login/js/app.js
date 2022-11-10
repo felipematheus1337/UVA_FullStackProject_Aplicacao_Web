@@ -143,9 +143,12 @@ buttonSendEmailToRecover.addEventListener('click',async () => {
         await axios.post(`${baseURL}/user/recover`,{
             email:emailRecovery
         }).then(response => {
+            console.log(response);
           if(response.status === 200) {
-            alert(String(`${response.data}`))
+            alert("Token enviado!!")
             window.location.href = "http://127.0.0.1:5500/frontend/recoverpw/recover.html"
+          } else {
+            alert("Email invalido!")
           }
         })
         

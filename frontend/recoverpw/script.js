@@ -18,6 +18,20 @@ function getElementsFromDOM() {
         let token = document.getElementById("input-token").value
         let senha = document.getElementById("input-senha").value
         let repeatSenha = document.getElementById("input-repeat-senha").value
+        let email = document.getElementById("input-email").value
+        console.log(senha,repeatSenha)
+        if((senha === repeatSenha) === false) {
+         alert("As duas senhas não são iguais!")
+         return;
+        } else {
+            const obj = {
+                token,
+                password:senha,
+                email
+            }
+         
+        }
+        
         
     })
 }

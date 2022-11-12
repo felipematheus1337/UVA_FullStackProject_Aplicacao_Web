@@ -9,7 +9,8 @@ const config = {
 document.addEventListener('DOMContentLoaded', function() {
     var s = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
-
+  
+  
     const isLogged = token;
     
 

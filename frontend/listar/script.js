@@ -98,9 +98,13 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
     li.appendChild(divBody);
    
     let buttonRemove = document.createElement("button");
+    let buttonEdit = document.createElement("button");
     buttonRemove.setAttribute("class","btn red waves-yellow");
+    buttonEdit.setAttribute("class","btn blue waves-blue")
     buttonRemove.innerHTML = `Remover`
+    buttonEdit.innerHTML = `Atualizar`
     divBody.appendChild(buttonRemove);
+    divBody.appendChild(buttonEdit);
     buttonRemove.style.marginLeft= '32px'
 
     let h3Nome = document.createElement('h6');
@@ -162,6 +166,11 @@ for(let i = 0; i < timesToCreateStudents.length; i++) {
             console.log(e);
         })
         ul.remove(li);
+    })
+
+    buttonEdit.addEventListener('click',() => {
+        sessionStorage.setItem("studentToUpdate",JSON.stringify(student[i]));
+        window.location.href = "http://127.0.0.1:5500/frontend/atualizar/atualizar.html"
     })
 
 }

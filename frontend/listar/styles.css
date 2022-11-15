@@ -42,9 +42,13 @@ h1 {
     list-style: none;
     text-align: justify;
     margin: 35px;
-    width: 243px;
+    width: 350px;
     
     
+}
+
+.collapsible button {
+margin: 5px;
 }
 
 

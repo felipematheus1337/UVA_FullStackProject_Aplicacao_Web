@@ -86,9 +86,12 @@ class AlunoController {
   }
 
   async consultarPorEmail(req, res) {
-    const { email } = req.params;
+    console.log(req.params);
+    // eslint-disable-next-line quotes
+    const email = String(req.params.parametro).replace("%40", "@");
+    console.log(email);
     try {
-      const aluno = await Aluno.findOne(email);
+      const aluno = await Aluno.findOne({ where: { email } });
       return res.status(200).json(aluno);
     } catch (e) {
       console.log(e);

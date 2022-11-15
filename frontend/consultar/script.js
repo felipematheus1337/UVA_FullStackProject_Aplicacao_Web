@@ -39,16 +39,37 @@ function getElementsFromDOM() {
             alert("Não é possível uma consulta vazia!")
             return;
         }
-        
-        await axios.get(`${baseURL}/aluno/${parametro}/${paramValue}`,paramValue).then(res => {
-           if(res.data) {
-            if(clicked >= 2) {
+        if(parametro === 'email') {
+            let correctParam = paramValue.replace("@","%40")
+            console.log(correctParam)
+            await axios.get(`${baseURL}/aluno/${parametro}/${paramValue}`,paramValue).then(res => {
+                console.log(res.data);
+               if(res.data) {
+                if(clicked >= 2) {
+                    clearPastListings();
+                }
+                generateSearchedStudent(res.data,clicked)
+               
+               } else {
                 clearPastListings();
-            }
-            generateSearchedStudent(res.data,clicked)
-           
-           }
-        })
+               }
+            })
+        } else {
+            await axios.get(`${baseURL}/aluno/${parametro}/${paramValue}`,paramValue).then(res => {
+                console.log(res.data);
+               if(res.data) {
+                if(clicked >= 2) {
+                    clearPastListings();
+                }
+                generateSearchedStudent(res.data,clicked)
+               
+               } else {
+                clearPastListings();
+               }
+            })
+        }
+        
+        
 
     })
 }
@@ -90,8 +111,6 @@ function generateSearchedStudent(student,clicked) {
    divResult.appendChild(studentMatricula);
    divResult.appendChild(studentTurno);
    
-
- 
 
    
 
